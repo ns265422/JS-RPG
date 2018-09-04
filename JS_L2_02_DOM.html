@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <title>DOM 常用屬性與方法</title>
+</head>
+
+<body>
+    <!-- 以下是用來示範 getElementById 的 HTML  -->
+    <div id="item">This is a box</div>
+    <br>
+    <!-- 以下是用來示範 getElementsByClassName/querySelectorAll 的 HTML  -->
+    <div>
+        <div class="box">This is box 1</div>
+        <div class="box">This is box 2</div>
+        <!-- 以下是用來示範 querySelector 的 HTML  -->
+        <p>This is a box for querySelector</p>
+    </div>
+    <!-- 因為在 <head> 會先載入，但那時 <body> 還沒載入，方法如 getElementById 無法取得在 HTML 的標籤-->
+    <script>
+        "use strict";
+        // Part 1. document 常用屬性與方法
+        var box = document.getElementById("item"); // 使用 getElementId 取得預設好 id 的 HTML 標籤的物件；若有兩個相同 id，會取最近的第一個（由上往下找）
+        console.log("id 為 box 的 div 內容： " + box.innerHTML);
+        var boxes = document.getElementsByClassName("box");
+        console.log("以下是 getElementsByClassName 取得的 boxes 內容");
+        for (var i = 0; i < boxes.length; i++) {
+            console.log(boxes[i].innerHTML); // getElementsByClassName 會回傳陣列，所以可以使用 forEach 方法
+        }
+        console.log("---------------結束 getElementsByClassName---------------");
+        box = document.querySelector("div > p");
+        console.log("符合 div > p 選擇器的內容： " + box.innerHTML) // 使用 querySelector 取得第一個符合描述的 HTML 標籤的物件
+        boxes = document.querySelectorAll("div, p, a");
+        console.log("以下是 querySeletorAll 取得的 boxes 內容");
+        for (var i = 0; i < boxes.length; i++) {
+            console.log(boxes[i].innerHTML); // getElementsByClassName 會回傳陣列，所以可以使用 forEach 方法
+        }
+        console.log("---------------結束 querySeletorAll---------------");
+        // Part 2. element 常用屬性與方法
+        box = document.getElementById("item");
+        console.log("box.id : " + box.id); // element 的 id
+        console.log("box.nodeName : " + box.nodeName); // element 的標籤類型
+        console.log("box.innerHTML : " + box.innerHTML); // element 的內容，裡面可以是一群 HTML 標籤和文字
+        // Part 3. window 常用屬性與方法
+        // 使用 window 方法不需要指定任何物件， <script> 所在位置就是 window
+        // 請自行在 Console 上貼上下列程式碼進行嘗試
+        // alert("這是警告訊息！");    // 上方會跳出一個警告訊息
+        /*
+          var answer = confirm("確定要進入網頁？");    // 上方會跳出一個確認訊息，選擇「確定」會回傳 true，選擇「取消」會回傳 false
+          console.log("你剛才的選擇為： " + answer );
+        */
+        //  location = "http://www.google.com";
+
+        var i = 0; // 用來展示重複訊息的次數
+        function message() { // 下面會使用 setInterval 重複執行 message
+            console.log("這個訊息會每三秒重複一次，這是第" + i + "次");
+            i++; //每次使用完後， X 會遞增 1
+        }
+
+        // 記得把 setInterval 的結果存到 id 裡，這樣之後才能取消
+        // var id = setInterval(message, 1000); // setInterval 會每秒執行 1 次 message()，這裡的 1000 是以毫米為單位，所以 1000 = 1 秒
+
+        // clearInterval(id); // 取消 interval
+    </script>
+</body>
+
+</html>

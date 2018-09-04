@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <title>操作 HTML 元素 - (2) 實作：To-Do List</title>
+    <script>
+        /*
+                            createToDo() 內會有以下的執行步驟：
+
+                            1.加入創建 To-Do 的標籤
+                            2.處理 To-Do 的文字內容
+                            3.設定 replaceButton onclick 事件
+                            4.撰寫 replaceButton onclick 功能
+                            5.設定 replaceButton 的文字
+                            6.把 replace button 加入 To-Do
+                            7.完成 removeButton 按鈕（給提示，但由你來實作！）
+                            8.把 To-Do 加入 todolist（不給提示，自行摸索！）
+                            9.清空輸入欄位（不給提示，自行摸索！）
+                                                                */
+        function createToDo() {
+            var todo = document.createElement("div");
+            var span = document.createElement("span");
+            var input = document.getElementById("input").value;
+
+            if (input == "") {
+                input = "廢文一篇";
+            }
+
+            span.innerHTML = input;
+            todo.appendChild(span);
+            var replaceButton = document.createElement("button");
+            replaceButton.onclick = function() {
+                var input = document.getElementById("input").value;
+                if (input == "") {
+                    alert("你並沒有輸入任何文字");
+                    return;
+                }
+                this.parentNode.firstChild.innerHTML = input;
+                document.getElementById("input").value = "";
+            }
+            replaceButton.textContent = "R";
+            todo.appendChild(replaceButton);
+            var removeButton = document.createElement("button");
+            removeButton.onclick = function() {
+                this.parentNode.parentNode.removeChild(this.parentNode);
+            }
+            removeButton.textContent = "V";
+            todo.appendChild(removeButton);
+            document.getElementById("todolist").appendChild(todo);
+            document.getElementById("input").value = "";
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="input">
+        <button onclick="createToDo()"> + </button>
+
+        <div id="todolist"></div>
+    </div>
+</body>

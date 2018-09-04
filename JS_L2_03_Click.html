@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <title>事件驅動 - (1) 設定事件</title>
+</head>
+
+<body>
+
+    <div style="margin:0px auto;padding-left: 40px; width:720px">
+        <!-- 以下這個按鈕會發出一個警告訊息在上方 -->
+        請按下鍵盤上的「A」按鍵來獲得訊息。
+        <br>
+        <!-- 在 HTML 標籤裡設定按鈕的滑鼠點擊事件驅動 -->
+        <button class="button" onclick="alertByButton()">發出警告訊息</button>
+
+    </div>
+    <script>
+        "use strict";
+
+        function alertByButton() {
+            alert("這是滑鼠點擊測試用的警告訊息！"); // 上方會跳出一個警告訊息
+        }
+
+        function alertByKey() {
+            alert("你按了 A！");
+        }
+
+        // 設定 document 的 onkeyup 事件驅動，一旦按了鍵盤，這個屬性裡的 function 會收到事件的資料，並被驅動去執行對應的步驟
+        document.onkeyup = function(event) { // 事件是一個 event 物件
+            var key = String.fromCharCode(event.keyCode); // keyCode 是事件的屬性，代表我們按鍵輸入的鍵的數字，要用 strig 的方法轉換成字元
+            if (key == "A") { // 轉換成字元後，來做i 叫
+                alertByKey();
+            }
+        }
+    </script>
+</body>
+
+</html>
